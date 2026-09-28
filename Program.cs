@@ -23,8 +23,8 @@ public class DiagnosticSession
 
     public void DisplayDiagnostics()
     {
-        Console.WriteLine($"Current status: {currentCoolingSystem.GetStatus()}");
-        Console.WriteLine($"Current error reason: {currentCoolingSystem.GetErrorReason()}");
+        Console.WriteLine($"Current status: {currentCoolingSystem.GetStatus}");
+        Console.WriteLine($"Current error reason: {currentCoolingSystem.GetErrorReason}");
     }
 
     public RepairOption GetRepairChoice()
@@ -62,6 +62,17 @@ public class DiagnosticSession
             Console.WriteLine("Repair failed.");
         }
     }
+
+    public void RunSession()
+    {
+        DisplayDiagnostics();
+
+        RepairOption repairOption = GetRepairChoice();
+
+        ExecuteRepair(repairOption);
+        
+        DisplayDiagnostics();
+    }
 }
 
 public class CoolingSystem
@@ -69,8 +80,8 @@ public class CoolingSystem
     private ErrorReason errorReason;
     private Status status;
 
-    public Status GetStatus() => status;
-    public ErrorReason GetErrorReason() => errorReason;
+    public Status GetStatus => status;
+    public ErrorReason GetErrorReason => errorReason;
     public void StartFault(ErrorReason errorReason)
     {
         switch (errorReason)
